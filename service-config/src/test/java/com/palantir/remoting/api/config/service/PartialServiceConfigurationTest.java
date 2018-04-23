@@ -41,11 +41,13 @@ public final class PartialServiceConfigurationTest {
                 .maxNumRetries(Optional.of(5))
                 .backoffSlotSize(HumanReadableDuration.days(1))
                 .addUris("uri1")
+                .serviceId("1234")
                 .proxyConfiguration(ProxyConfiguration.of("host:80"))
                 .build();
         String camelCase = "{\"apiToken\":\"bearerToken\",\"security\":"
                 + "{\"trustStorePath\":\"truststore.jks\",\"trustStoreType\":\"JKS\",\"keyStorePath\":null,"
                 + "\"keyStorePassword\":null,\"keyStoreType\":\"JKS\",\"keyStoreKeyAlias\":null},\"uris\":[\"uri1\"],"
+                + "\"serviceId\":\"1234\","
                 + "\"connectTimeout\":\"1 day\",\"readTimeout\":\"1 day\",\"writeTimeout\":\"1 day\","
                 + "\"maxNumRetries\":5,\"backoffSlotSize\":\"1 day\","
                 + "\"enableGcmCipherSuites\":null,"
@@ -57,7 +59,8 @@ public final class PartialServiceConfigurationTest {
                 + "\"connect-timeout\":\"1 day\",\"read-timeout\":\"1 day\",\"write-timeout\":\"1 day\","
                 + "\"max-num-retries\":5,\"backoff-slot-size\":\"1 day\","
                 + "\"uris\":[\"uri1\"],\"proxy-configuration\":{\"host-and-port\":\"host:80\",\"credentials\":null},"
-                + "\"enable-gcm-cipher-suites\":null}";
+                + "\"enable-gcm-cipher-suites\":null,"
+                + "\"service-id\":\"1234\"}";
 
         assertThat(mapper.writeValueAsString(serialized)).isEqualTo(camelCase);
         assertThat(mapper.readValue(camelCase, PartialServiceConfiguration.class)).isEqualTo(serialized);
@@ -67,14 +70,16 @@ public final class PartialServiceConfigurationTest {
     @Test
     public void serDe_optional() throws Exception {
         PartialServiceConfiguration serialized = PartialServiceConfiguration.builder().build();
-        String camelCase = "{\"apiToken\":null,\"security\":null,\"uris\":[],\"connectTimeout\":null,"
+        String camelCase = "{\"apiToken\":null,\"security\":null,\"uris\":[],"
+                + "\"serviceId\":null,\"connectTimeout\":null,"
                 + "\"readTimeout\":null,\"writeTimeout\":null,\"maxNumRetries\":null,\"backoffSlotSize\":null,"
                 + "\"enableGcmCipherSuites\":null,"
                 + "\"proxyConfiguration\":null}";
         String kebabCase = "{\"api-token\":null,\"security\":null,\"connect-timeout\":null,"
                 + "\"read-timeout\":null,\"write-timeout\":null,\"max-num-retries\":null,\"backoff-slot-size\":null,"
                 + "\"enable-gcm-cipher-suites\":null,"
-                + "\"uris\":[],\"proxy-configuration\":null}";
+                + "\"uris\":[],\"proxy-configuration\":null,"
+                + "\"service-id\":null}";
 
         assertThat(ObjectMappers.newClientObjectMapper().writeValueAsString(serialized)).isEqualTo(camelCase);
         assertThat(mapper.readValue(camelCase, PartialServiceConfiguration.class)).isEqualTo(serialized);

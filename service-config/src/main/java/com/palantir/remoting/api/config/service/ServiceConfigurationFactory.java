@@ -71,6 +71,7 @@ public final class ServiceConfigurationFactory {
                         () -> new IllegalArgumentException("Must provide default security or "
                                 + "service-specific security block for service: " + serviceName)))
                 .uris(partial.uris())
+                .serviceId(partial.serviceId())
                 .connectTimeout(orElse(partial.connectTimeout(), services.defaultConnectTimeout())
                         .map(t -> Duration.ofMillis(t.toMilliseconds())))
                 .readTimeout(orElse(partial.readTimeout(), services.defaultReadTimeout())

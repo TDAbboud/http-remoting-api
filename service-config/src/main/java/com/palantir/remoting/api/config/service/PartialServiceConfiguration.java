@@ -40,6 +40,9 @@ public interface PartialServiceConfiguration {
     /** A list of service URIs. */
     List<String> uris();
 
+    /** A unique identifier for a service. */
+    Optional<String> serviceId();
+
     /** Connect timeout for requests. */
     Optional<HumanReadableDuration> connectTimeout();
 
@@ -116,6 +119,11 @@ public interface PartialServiceConfiguration {
         @JsonProperty("enable-gcm-cipher-suites")
         Builder enableGcmCipherSuitesKebabCase(Optional<Boolean> enableGcmCipherSuites) {
             return enableGcmCipherSuites(enableGcmCipherSuites);
+        }
+
+        @JsonProperty("service-id")
+        Builder serviceIdKebabCase(Optional<String> serviceId) {
+            return serviceId(serviceId);
         }
     }
 }

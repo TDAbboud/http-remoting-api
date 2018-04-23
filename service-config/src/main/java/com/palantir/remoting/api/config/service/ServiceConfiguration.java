@@ -36,6 +36,8 @@ public interface ServiceConfiguration {
 
     List<String> uris();
 
+    Optional<String> serviceId();
+
     Optional<Duration> connectTimeout();
 
     Optional<Duration> readTimeout();

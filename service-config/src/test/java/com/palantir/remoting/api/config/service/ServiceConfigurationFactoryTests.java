@@ -59,6 +59,7 @@ public final class ServiceConfigurationFactoryTests {
     private static final ImmutableList<String> uris = ImmutableList.of("uri");
     private static final boolean defaultEnableGcm = true;
     private static final boolean enableGcm = false;
+    private static final String serviceId = "1234";
 
     private final ObjectMapper mapper = new ObjectMapper(new YAMLFactory())
             .registerModule(new ShimJdk7Module())
@@ -185,7 +186,8 @@ public final class ServiceConfigurationFactoryTests {
         String camelCase = "{\"apiToken\":\"bearerToken\",\"security\":"
                 + "{\"trustStorePath\":\"truststore.jks\",\"trustStoreType\":\"JKS\",\"keyStorePath\":null,"
                 + "\"keyStorePassword\":null,\"keyStoreType\":\"JKS\",\"keyStoreKeyAlias\":null},\"services\":"
-                + "{\"service\":{\"apiToken\":null,\"security\":null,\"uris\":[\"uri\"],\"connectTimeout\":null,"
+                + "{\"service\":{\"apiToken\":null,\"security\":null,\"uris\":[\"uri\"],"
+                + "\"serviceId\":null,\"connectTimeout\":null,"
                 + "\"readTimeout\":null,\"writeTimeout\":null,\"maxNumRetries\":null,\"backoffSlotSize\":null,"
                 + "\"enableGcmCipherSuites\":null,"
                 + "\"proxyConfiguration\":null}},\"proxyConfiguration\":"
@@ -197,7 +199,7 @@ public final class ServiceConfigurationFactoryTests {
                 + "\"key-store-password\":null,\"key-store-type\":\"JKS\",\"key-store-key-alias\":null},\"services\":"
                 + "{\"service\":{\"apiToken\":null,\"security\":null,\"connect-timeout\":null,\"read-timeout\":null,"
                 + "\"write-timeout\":null,\"max-num-retries\":null,\"backoffSlotSize\":null,\"uris\":[\"uri\"],"
-                + "\"enable-gcm-cipher-suites\":null,"
+                + "\"service-id\":null,\"enable-gcm-cipher-suites\":null,"
                 + "\"proxy-configuration\":null}},\"proxy-configuration\":"
                 + "{\"host-and-port\":\"host:80\",\"credentials\":null},\"connect-timeout\":\"1 day\","
                 + "\"read-timeout\":\"1 day\",\"write-timeout\":\"1 day\",\"backoff-slot-size\":\"1 day\"}";
